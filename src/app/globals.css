@@ -1,26 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* CuraMed Brand Colors */
+  --color-curamed-navy: #0A3F63;
+  --color-curamed-navy-dark: #06283F;
+  --color-curamed-navy-light: #11537E;
+  
+  --color-curamed-teal: #13B4C6;
+  --color-curamed-teal-hover: #0E9CAB;
+  --color-curamed-teal-light: #E7F9FA;
+
+  /* Pastel Feature Cards */
+  --color-pastel-green: #DDF0D5;
+  --color-pastel-green-border: #CBE6BF;
+  --color-pastel-pink: #FCE1E8;
+  --color-pastel-pink-border: #F8CAD5;
+  --color-pastel-blue: #D2E8F6;
+  --color-pastel-blue-border: #BCE0F3;
+  --color-pastel-mint: #D4F4F0;
+  --color-pastel-mint-border: #BFEBE5;
+
+  /* Form Section */
+  --color-form-card: #C7E6ED;
+
+  /* Neutral */
+  --color-page-bg: #EDF5F7;
+  --color-neutral-text: #172B3F;
+  --color-neutral-muted: #62768A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #EDF5F7;
+  --foreground: #172B3F;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--color-page-bg);
+  color: var(--color-neutral-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Page shell framing like the reference screenshot */
+.curamed-shell {
+  max-width: 1240px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Watermark typography */
+.curamed-watermark {
+  font-size: clamp(2.5rem, 14vw, 12rem);
+  font-weight: 900;
+  line-height: 0.85;
+  user-select: none;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.05);
+  letter-spacing: -0.04em;
+  overflow: hidden;
+  white-space: nowrap;
 }
