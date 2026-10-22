@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
+import { prisma, ensureDbReady } from '@/lib/db'
 import { appointmentSchema } from '@/types'
 import { z } from 'zod'
 
 export async function POST(req: NextRequest) {
   try {
+    await ensureDbReady()
+
     const body = await req.json()
     const data = appointmentSchema.parse(body)
 
@@ -47,12 +49,15 @@ export async function POST(req: NextRequest) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ success: false, errors: err.issues }, { status: 400 })
     }
-    console.error(err)
-    return NextResponse.json({ success: false, message: 'Server error occurred while booking.' }, { status: 500 })
+    console.error('Appointment booking error:', err)
+    const errMessage = err instanceof Error ? err.message : 'Server error occurred while booking.'
+    return NextResponse.json({ success: false, message: errMessage }, { status: 500 })
   }
 }
 
 export async function GET(req: NextRequest) {
+  await ensureDbReady()
+
   // Simple protection for GET endpoint
   const authHeader = req.headers.get('authorization')
   if (process.env.ADMIN_TOKEN && authHeader !== `Bearer ${process.env.ADMIN_TOKEN}`) {

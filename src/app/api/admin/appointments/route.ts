@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
+import { prisma, ensureDbReady } from '@/lib/db'
 import { verifyAdminSession } from '@/lib/auth'
 
 export async function GET(req: NextRequest) {
+  await ensureDbReady()
   const isAuth = await verifyAdminSession()
   if (!isAuth) {
     return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
